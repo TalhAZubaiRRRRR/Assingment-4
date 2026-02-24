@@ -76,15 +76,17 @@ function toggleStyle(id) {
     selected.classList.add("bg-blue-400", "text-white")
 
     if (id == 'interview-btn') {
-
+        
         allCardSection.classList.add('hidden')
         filterSection.classList.remove('hidden')
+        renderInterview()
     } else if (id == 'all-btn') {
         allCardSection.classList.remove('hidden')
         filterSection.classList.add('hidden')
     } else if (id == 'rejecet-btn') {
         allCardSection.classList.add('hidden')
         filterSection.classList.remove('hidden')
+        
         renderreject()
     }
    
@@ -92,7 +94,22 @@ function toggleStyle(id) {
 
 }
 
+let nojobSection = `
+ <div class="space-y-6 ">
+                <!-- //NO JOBS SECTION -->
+                <div class="flex justify-between shadow p-6 rounded-md bg-[#ffffff] space-y-2 h-[448px] mt-5 ">
+                    <div class="mx-auto my-auto ">
+                        <img src="jobs.png" alt="" class="pl-[100px]">
 
+                        <p class="text-[#002C5C] font-extrabold text-xl text-center mt-5">No jobs available</p>
+                        <p class="text-[#323b49]">Check back soon for new job opportunities</p>
+
+                    </div>
+
+
+                </div>
+            </div>
+            `
 mainContainer.addEventListener('click', function (event) {
     // console.log(event.target.classList.contains('enter-btn'))
     if (event.target.classList.contains('enter-btn')) {
@@ -193,6 +210,11 @@ else if (event.target.closest('.btn-delete')) {
 
 function renderInterview() {
     filterSection.innerHTML = ''
+    if(interviewList.length <= 0){
+        let div = document.createElement('div')
+        div.innerHTML=nojobSection
+        filterSection.appendChild(div)
+    }
     for (let interview of interviewList) {
         let div = document.createElement('div')
         div.className = 'space-y-6 mb-6'
@@ -233,6 +255,11 @@ function renderInterview() {
 }
 function renderreject() {
     filterSection.innerHTML = ''
+     if(rejectedList.length <= 0){
+        let div = document.createElement('div')
+        div.innerHTML=nojobSection
+        filterSection.appendChild(div)
+    }
     for (let rejecet of rejectedList) {
         let div = document.createElement('div')
         div.className = 'space-y-6 mb-6'
